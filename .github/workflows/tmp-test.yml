@@ -29,6 +29,9 @@ jobs:
       run: dotnet test ./eShopOnWeb.sln --configuration Release
     - name: dotnet publish
       run: dotnet publish ./src/Web/Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      # Unit Test
+    - name: DotNet Unit Test
+      run: dotnet test
     # upload the published website code artifacts
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
@@ -36,10 +39,4 @@ jobs:
         name: .net-app
         path: ${{env.DOTNET_ROOT}}/myapp
         
-    # upload the bicep template as artifacts for next job
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v3
-      with:
-        name: bicep-template
-        path: ${{ env.TEMPLATE-FILE }}
         
