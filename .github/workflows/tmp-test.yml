@@ -31,6 +31,8 @@ jobs:
       run: dotnet build ./eShopOnWeb.sln --configuration Release
     - name: Test with dotnet
       run: dotnet test ./eShopOnWeb.sln --configuration Release
+    - nmae: DD Test
+      run: dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
     - name: dotnet publish
       run: dotnet publish ./src/Web/Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
     # upload the published website code artifacts
