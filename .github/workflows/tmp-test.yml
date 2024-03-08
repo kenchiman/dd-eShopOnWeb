@@ -7,7 +7,7 @@ on:
 #Environment variables https://docs.github.com/en/actions/learn-github-actions/environment-variables
 env:
   TEMPLATE-FILE: infra/webapp.bicep
-
+  DD_API_KEY: ${{ secrets.DD_API_KEY }}
 
 jobs:
   #Build, test and publish .net web project in repository
@@ -30,9 +30,13 @@ jobs:
     - name: Build with dotnet
       run: dotnet build ./eShopOnWeb.sln --configuration Release
     - name: Test with dotnet
-      run: dotnet test ./eShopOnWeb.sln --configuration Release
-    - name: DD Test
-      run: dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+      run: |
+        #dotnet test ./eShopOnWeb.sln --configuration Release
+        DD_CIVISIBILITY_AGENTLESS_ENABLED=true
+        "DD_API_KEY=${{ DD_API_KEY }}"
+        DD_SITE="datadoghq.eu"
+        dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln --configuration Release
+
     - name: dotnet publish
       run: dotnet publish ./src/Web/Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
     # upload the published website code artifacts
