@@ -1,13 +1,13 @@
-name: eShopOnWeb Unit test
+name: Datadog Static Analysis
 
 #Triggers (uncomment line below to use it)
 on:
   workflow_dispatch
 
 jobs:
-  #Build, test and publish .net web project in repository
-  buildandtest:
+  static-analysis:
     runs-on: ubuntu-latest
+    name: Datadog Static Analyzer
     steps:
     - name: Checkout
       uses: actions/checkout@v3
