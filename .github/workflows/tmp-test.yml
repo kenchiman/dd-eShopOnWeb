@@ -9,7 +9,7 @@ env:
   TEMPLATE-FILE: infra/webapp.bicep
   DD_API_KEY: ${{ secrets.DD_API_KEY }}
   DD_CIVISIBILITY_AGENTLESS_ENABLED: true
-  DD_SITE: "datadoghq.eu"
+  DD_SITE: datadoghq.eu
   
 
 jobs:
