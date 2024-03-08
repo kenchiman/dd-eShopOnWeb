@@ -35,9 +35,6 @@ jobs:
     - name: Test with dotnet
       run: |
         #dotnet test ./eShopOnWeb.sln --configuration Release
-        DD_CIVISIBILITY_AGENTLESS_ENABLED=true
-        DD_API_KEY="${{ secrets.DD_APP_KEY }}"
-        DD_SITE="datadoghq.eu"
         dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln --configuration Release
 
     - name: dotnet publish
