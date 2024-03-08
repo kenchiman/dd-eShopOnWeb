@@ -36,7 +36,7 @@ jobs:
       run: |
         #dotnet test ./eShopOnWeb.sln --configuration Release
         # dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln --configuration Release
-        dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+        dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln
 
     - name: dotnet publish
       run: dotnet publish ./src/Web/Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
