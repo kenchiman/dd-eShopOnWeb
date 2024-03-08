@@ -33,7 +33,7 @@ jobs:
       run: |
         #dotnet test ./eShopOnWeb.sln --configuration Release
         DD_CIVISIBILITY_AGENTLESS_ENABLED=true
-        "DD_API_KEY=${{ DD_API_KEY }}"
+        "DD_API_KEY=${{ env.DD_API_KEY }}"
         DD_SITE="datadoghq.eu"
         dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln --configuration Release
 
