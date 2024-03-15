@@ -59,7 +59,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: src/Web/Dockerfile
+        file: /src/Web/Dockerfile
         push: false
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
