@@ -50,11 +50,16 @@ jobs:
         login-server: ${{ secrets.ACR_URL }}
         username: ${{ secrets.ACR_USER }}
         password: ${{ secrets.ACR_PWD }}
-        
-    #Download the publish files created in previous job
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    # Download the publish files created in previous job
     - name: Build and push image to ACR
-      run:
-        export DOCKER_BUILDKIT=1
-        docker build -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} . -f src/Web/Dockerfile
-         
-        docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} 
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: src/Web/Dockerfile
+        push: false
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
