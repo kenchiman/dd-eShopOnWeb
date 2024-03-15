@@ -54,5 +54,5 @@ jobs:
     #Download the publish files created in previous job
     - name: Build and push image to ACR
       run:
-         docker build -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} -f src/Web/Dockerfile .
+         docker build -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} . -f src/Web/Dockerfile
          docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} 
