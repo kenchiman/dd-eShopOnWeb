@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: eShopOnWeb
-        image: ddeastacr.azurecr.io: latest
+        image: ddeastacr.azurecr.io:dd-eShopOnWeb:latest
         securityContext:
           allowPrivilegeEscalation: false
         ports:
