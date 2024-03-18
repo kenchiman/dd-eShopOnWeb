@@ -53,5 +53,5 @@ jobs:
       run: |
         cd src/Web
         export DOCKER_BUILDKIT=1
-        docker build　-t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} -f Dockerfile .
+        docker build　-t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} .
         docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} 
