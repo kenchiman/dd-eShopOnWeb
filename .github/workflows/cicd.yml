@@ -46,8 +46,8 @@ jobs:
       
     - name: Build and push image to ACR
       run: |
-        docker build --pull -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:latest -f src/Web/Dockerfile .
-        docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:latest
+        docker build --pull -t ${{ secrets.ACR_URL }}/dd-eshopweb:latest -f src/Web/Dockerfile .
+        docker push ${{ secrets.ACR_URL }}/dd-eshopweb:latest
 
     - name: Login to Azure with OIDC
       uses: azure/login@v1
