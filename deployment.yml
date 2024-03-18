@@ -8,14 +8,14 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: eShopOnWeb
+      app: eshopweb
   template:
     metadata:
       labels:
-        app: eShopOnWeb
+        app: eshopweb
     spec:
       containers:
-      - name: eShopOnWeb
+      - name: eshopweb
         image: ddeastacr.azurecr.io/dd-eshopweb:latest
         securityContext:
           allowPrivilegeEscalation: false
