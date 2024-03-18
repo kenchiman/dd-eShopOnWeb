@@ -37,6 +37,11 @@ jobs:
         #dotnet test ./eShopOnWeb.sln --configuration Release
         # dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln --configuration Release
         dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln
+
+    - name: Test with cmd
+      run: |
+        pwd
+        ls -la
         
     - uses: azure/docker-login@v1
       with:
