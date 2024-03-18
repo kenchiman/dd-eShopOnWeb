@@ -48,3 +48,32 @@ jobs:
       run: |
         docker build --pull -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:latest -f src/Web/Dockerfile .
         docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:latest
+
+    - name: Login to Azure with OIDC
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Azure Kubernetes set context
+      uses: Azure/aks-set-context@v3
+      with:
+        resource-group: ${{ env.AKS_RESOURCE_GROUP }}
+        cluster-name: ${{ env.AKS_CLUSTER_NAME }}
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        container-registry-url: ${{ secrets.ACR_URL }}
+        container-registry-username: ${{ secrets.ACR_USER }}
+        container-registry-password: ${{ secrets.ACR_PWD }}
+        secret-name: pull
+
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        manifests: |
+          deployment.yml
+        images: |
+          ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }}
+        imagepullsecrets: |
+          pull
