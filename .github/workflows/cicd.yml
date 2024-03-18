@@ -38,11 +38,6 @@ jobs:
         # dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln --configuration Release
         dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test ./eShopOnWeb.sln
 
-    - name: Test with cmd
-      run: |
-        pwd
-        ls -la
-
     - uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.ACR_URL }}
@@ -51,7 +46,5 @@ jobs:
       
     - name: Build and push image to ACR
       run: |
-        # export DOCKER_BUILDKIT=1
-        # docker build　-t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} -f src/Web/Dockerfile .
-        docker build --pull -t ${{ secrets.ACR_URL }}/web -f src/Web/Dockerfile .
-        # docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} 
+        docker build --pull -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:latest -f src/Web/Dockerfile .
+        docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:latest
