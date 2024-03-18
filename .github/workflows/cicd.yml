@@ -60,8 +60,8 @@ jobs:
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v3
       with:
-        resource-group: ${{ env.AKS_RESOURCE_GROUP }}
-        cluster-name: ${{ env.AKS_CLUSTER_NAME }}
+        resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
+        cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
 
     - uses: azure/k8s-create-secret@v1
       with:
