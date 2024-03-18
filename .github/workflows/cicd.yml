@@ -51,9 +51,7 @@ jobs:
       
     - name: Build and push image to ACR
       run: |
+        cd src/Web
         export DOCKER_BUILDKIT=1
-        docker build \
-          -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} \
-          -t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:latest \
-          --label dockerfile-path=src/Web/Dockerfile \
-          -f src/Web/Dockerfile 
+        docker build　-t ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} -f Dockerfile .
+        docker push ${{ secrets.ACR_URL }}/dd-eShopOnWeb:${{ github.sha }} 
